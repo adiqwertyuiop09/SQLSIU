@@ -23,7 +23,8 @@ namespace SQLSIU
         public DataTable dataTable;
         public BindingSource bindingSource;
 
-        private string connectionString = "Server = LAB-A-PC00; Database=ClubDBadi;User Id = paunillan.a; Password=12345;";
+        private string connectionString = "Data Source=LOCALHOST\\SQLEXPRESS;Initial Catalog=ClubDBadi;Integrated Security=True;";
+
         public string _FirstName, _MiddleName, _LastName, _Gender, _Program;
         public int _Age;
 
@@ -116,14 +117,14 @@ namespace SQLSIU
 
                 string query = "SELECT StudentId FROM ClubMembers";
                 SqlCommand cmd = new SqlCommand(query, sqlConnect);
-                SqlDataReader reader = cmd.ExecuteReader();
+                sqlReader = cmd.ExecuteReader();
 
-                while (reader.Read())
+                while (sqlReader.Read())
                 {
-                    studentIDs.Add(reader.GetInt64(0)); 
+                    studentIDs.Add(sqlReader.GetInt64(0)); 
                 }
 
-                reader.Close();
+                sqlReader.Close();
                 CloseConnection();
             }
             catch (Exception ex)
@@ -162,6 +163,44 @@ namespace SQLSIU
             {
                 MessageBox.Show("Error retrieving student info: " + ex.Message);
                 return null;
+            }
+        }
+
+        public bool UpdateStudent(long StudentID, string FirstName, string MiddleName,
+                                string LastName, int Age, string Gender, string Program)
+        {
+            try
+            {
+                string updateQuery =
+                    "UPDATE ClubMembers SET " +
+                    "FirstName = @FirstName, " +
+                    "MiddleName = @MiddleName, " +
+                    "LastName = @LastName, " +
+                    "Age = @Age, " +
+                    "Gender = @Gender, " +
+                    "Program = @Program " +
+                    "WHERE StudentId = @StudentID";
+
+                SqlCommand cmd = new SqlCommand(updateQuery, sqlConnect);
+
+                cmd.Parameters.AddWithValue("@StudentID", StudentID);
+                cmd.Parameters.AddWithValue("@FirstName", FirstName);
+                cmd.Parameters.AddWithValue("@MiddleName", MiddleName);
+                cmd.Parameters.AddWithValue("@LastName", LastName);
+                cmd.Parameters.AddWithValue("@Age", Age);
+                cmd.Parameters.AddWithValue("@Gender", Gender);
+                cmd.Parameters.AddWithValue("@Program", Program);
+
+                OpenConnection();
+                cmd.ExecuteNonQuery();
+                CloseConnection();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error updating student: " + ex.Message);
+                return false;
             }
         }
 

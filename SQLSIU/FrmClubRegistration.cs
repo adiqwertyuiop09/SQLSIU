@@ -30,6 +30,8 @@ namespace SQLSIU
 
         }
 
+       
+
         private void registerBtn_Click(object sender, EventArgs e)
         {
             try
@@ -98,7 +100,7 @@ namespace SQLSIU
 
         private void refreshBtn_Click(object sender, EventArgs e)
         {
-
+            RefreshListofClubMembers();
         }
     }
 }

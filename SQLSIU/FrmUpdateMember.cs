@@ -66,7 +66,37 @@ namespace SQLSIU
 
         private void confirmBtn_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                if (studCombo.SelectedItem == null)
+                {
+                    MessageBox.Show("Please select a student.");
+                    return;
+                }
+
+                long studentID = long.Parse(studCombo.SelectedItem.ToString());
+
+                string first = txtfn.Text;
+                string middle = txtmn.Text;
+                string last = txtln.Text;
+                int age = int.Parse(txtage.Text);
+                string gender = combogender.Text;
+                string program = comboprogram.Text;
+
+                bool updated = clubRegistrationQuery.UpdateStudent(
+                    studentID, first, middle, last, age, gender, program
+                );
+
+                if (updated)
+                {
+                    MessageBox.Show("Student updated successfully!");
+                    this.Close(); 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Update failed: " + ex.Message);
+            }
         }
     }
 }
