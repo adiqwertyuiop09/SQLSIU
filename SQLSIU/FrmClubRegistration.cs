@@ -22,7 +22,12 @@ namespace SQLSIU
             FrmUpdateMember updateForm = new FrmUpdateMember();
                      
             updateForm.ShowDialog();      
-            RefreshListofClubMembers();
+            RefreshListofClubMembers();                          
+        }
+
+        private void studTxt_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void registerBtn_Click(object sender, EventArgs e)

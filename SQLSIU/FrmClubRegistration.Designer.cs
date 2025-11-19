@@ -65,6 +65,7 @@
             this.studTxt.Name = "studTxt";
             this.studTxt.Size = new System.Drawing.Size(100, 20);
             this.studTxt.TabIndex = 1;
+            this.studTxt.TextChanged += new System.EventHandler(this.studTxt_TextChanged);
             // 
             // label2
             // 
@@ -218,15 +219,15 @@
             // dgvClubMembers
             // 
             this.dgvClubMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClubMembers.Location = new System.Drawing.Point(159, 381);
+            this.dgvClubMembers.Location = new System.Drawing.Point(159, 331);
             this.dgvClubMembers.Name = "dgvClubMembers";
-            this.dgvClubMembers.Size = new System.Drawing.Size(538, 171);
+            this.dgvClubMembers.Size = new System.Drawing.Size(859, 171);
             this.dgvClubMembers.TabIndex = 16;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(156, 365);
+            this.label8.Location = new System.Drawing.Point(156, 315);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(108, 13);
             this.label8.TabIndex = 17;
@@ -234,7 +235,7 @@
             // 
             // refreshBtn
             // 
-            this.refreshBtn.Location = new System.Drawing.Point(766, 381);
+            this.refreshBtn.Location = new System.Drawing.Point(551, 531);
             this.refreshBtn.Name = "refreshBtn";
             this.refreshBtn.Size = new System.Drawing.Size(89, 35);
             this.refreshBtn.TabIndex = 18;

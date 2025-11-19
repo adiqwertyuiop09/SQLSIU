@@ -159,6 +159,7 @@
             this.studCombo.Name = "studCombo";
             this.studCombo.Size = new System.Drawing.Size(121, 21);
             this.studCombo.TabIndex = 14;
+            this.studCombo.SelectedIndexChanged += new System.EventHandler(this.studCombo_SelectedIndexChanged);
             // 
             // confirmBtn
             // 
@@ -192,6 +193,7 @@
             this.Controls.Add(this.label1);
             this.Name = "FrmUpdateMember";
             this.Text = "FrmUpdateMember";
+            this.Load += new System.EventHandler(this.FrmUpdateMember_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

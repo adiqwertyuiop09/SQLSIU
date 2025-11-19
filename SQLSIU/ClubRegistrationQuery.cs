@@ -106,5 +106,65 @@ namespace SQLSIU
             }
         }
 
+        public List<long> GetAllStudentIDs()
+        {
+            List<long> studentIDs = new List<long>();
+
+            try
+            {
+                OpenConnection();
+
+                string query = "SELECT StudentId FROM ClubMembers";
+                SqlCommand cmd = new SqlCommand(query, sqlConnect);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    studentIDs.Add(reader.GetInt64(0)); 
+                }
+
+                reader.Close();
+                CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving Student IDs: " + ex.Message);
+            }
+
+            return studentIDs;
+        }
+
+        public DataRow GetStudentByID(long studentID)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                OpenConnection();
+
+                string query = "SELECT StudentId, FirstName, MiddleName, LastName, Age, Gender, Program " +
+                               "FROM ClubMembers WHERE StudentId = @StudentId";
+
+                SqlCommand cmd = new SqlCommand(query, sqlConnect);
+                cmd.Parameters.AddWithValue("@StudentId", studentID);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+
+                CloseConnection();
+
+                if (dt.Rows.Count > 0)
+                    return dt.Rows[0];
+                else
+                    return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error retrieving student info: " + ex.Message);
+                return null;
+            }
+        }
+
+
     }
 }
