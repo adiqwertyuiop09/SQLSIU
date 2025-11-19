@@ -16,5 +16,10 @@ namespace SQLSIU
         {
             InitializeComponent();
         }
+
+        private void confirmBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
